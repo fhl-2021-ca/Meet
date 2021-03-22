@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+ protected void Page_Load(object sender, EventArgs e)
+{
+
+string msg = (string)Application["message"];
+txtmsg.Text = msg;
+}
+
+<head runat="server">
+    <title>Untitled Page</title>
+    <meta http-equiv="REFRESH" content="2">
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <asp:TextBox ID="txtmsg" runat="server" Height="290px" ReadOnly="True" TextMode="MultiLine"
+                         Width="490px"></asp:TextBox>
+        </div>
+    </form>
+</body>
