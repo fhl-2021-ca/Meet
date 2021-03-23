@@ -17,9 +17,10 @@ namespace Meet.Controllers
 
         // GET: /Meeting/Search?name=Abhishek&meetingId=4 
 
-        public string Search(string meetingId, string name)
+        public IActionResult Search(string meetingId, string name)
         {
-            return HtmlEncoder.Default.Encode($"Hello {name}, Meeting ID is: {meetingId}");
+            return View();
+            //return HtmlEncoder.Default.Encode($"Hello {name}, Meeting ID is: {meetingId}");
         }
 
         // GET: /Meeting/Join?userId=1234&meetingId=4 

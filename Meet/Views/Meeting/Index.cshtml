@@ -2,6 +2,53 @@
     ViewData["Title"] = "Meeting";
 }
 
-<h2>Meeting</h2>
+<script>
+    function entermeeting() {
+        alert("Hello");
+        window.location.href = '@Html.Raw(@Url.Action("Search", "Meeting", new { name = "Abhishek" , meetingId = "4" }))';
+    }
+</script>
 
-<p>Hello from our View Template!</p>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <div>
+                <table>
+                    <tr>
+                        <td style="width: 500px; text-align: center" colspan="2">
+                            <strong style="color:darkslateblue">Enter the meeting Id and name to join the meeting</strong>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <br />
+            <table>
+                <tr>
+                    <td style="width: 200px; text-align: right">
+                        <strong style="color:firebrick">Meeting Id</strong>:
+                    </td>
+                    <td style="width: 100px">
+                        <input type="text" id="meeting" name="meeting">
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 200px; text-align: right">
+                        <strong style="color:firebrick">Name</strong>:
+                    </td>
+                    <td style="width: 100px">
+                        <input type="text" id="name" name="name">
+                    </td>
+                </tr>
+            </table>
+            <br />
+            <table>
+                <tr>
+                    <td style="width: 500px" align="center">
+                        <input style="background-color:darkslateblue; color:white" type="button" id="joinmeeting" value="Enter Meeting" onclick="entermeeting()">
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+    </form>
+</body>
