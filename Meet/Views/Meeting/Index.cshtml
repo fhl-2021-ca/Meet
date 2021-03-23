@@ -4,8 +4,9 @@
 
 <script>
     function entermeeting() {
-        alert("Hello");
-        window.location.href = '@Html.Raw(@Url.Action("Search", "Meeting", new { name = "Abhishek" , meetingId = "4" }))';
+        var meetingId = document.getElementById("meeting").value;
+        var username = document.getElementById("name").value;
+        window.location = "Meeting/Search?meetingId=" + meetingId + "&name=" + username;
     }
 </script>
 
