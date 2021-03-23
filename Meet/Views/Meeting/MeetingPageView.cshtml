@@ -112,7 +112,7 @@
     function snoozeTimeSelected(event) {
         var d = new Date();
         console.log("snoozed by" + event.id + "minutes");
-        window.location = "Snooze?meetingId=" + '@Model.MeetingId' + "&userId=" + '@Model.UserId' + "&time=" + event.id
+        window.location = "Snooze?meetingId=" + '@Model.MeetingId' + "&alias=" + '@Model.Alias' + "&name=" + '@Model.Name' + "&time=" + event.id
             + "&actionTime=" + d.getTime();
     }
 
@@ -120,24 +120,26 @@
         console.log("running snooze logic");
         var d = new Date();
         var n = d.getTime();
-        var timer = n - '@Model.actionTime'
-        //document.getElementsByClassName("dropdown")[0].hidden = true;
-        document.getElementById("buttonSnoozeId").disabled = true;
+        if ('@Model.actionTime') {
+            var timer = n - '@Model.actionTime'
+            //document.getElementsByClassName("dropdown")[0].hidden = true;
+            document.getElementById("buttonSnoozeId").disabled = true;
 
-@*        document.getElementById("buttonSnoozeId").setAttribute("disabled", true);
-        document.getElementsByClassName("dropdown")[0].setAttribute("disabled", true);
-        document.getElementById("buttonSnoozeId").setAttribute("background-color", "#808080"); //background-color: #ff0000;
-        document.getElementsByClassName("dropdown")[0].disabled = true;
-*@        debugger;
-        setTimeout(function () {
-            //document.getElementsByClassName("dropdown")[0].hidden = false;
-            document.getElementById("buttonSnoozeId").disabled = false;
+    @*        document.getElementById("buttonSnoozeId").setAttribute("disabled", true);
+            document.getElementsByClassName("dropdown")[0].setAttribute("disabled", true);
+            document.getElementById("buttonSnoozeId").setAttribute("background-color", "#808080"); //background-color: #ff0000;
+            document.getElementsByClassName("dropdown")[0].disabled = true;
+    *@        debugger;
+            setTimeout(function () {
+                //document.getElementsByClassName("dropdown")[0].hidden = false;
+                document.getElementById("buttonSnoozeId").disabled = false;
 
-@*
-            document.getElementById("buttonSnoozeId").setAttribute("disabled", false);
-            document.getElementById("buttonSnoozeId").disabled = false;
-            document.getElementById("buttonSnoozeId").setAttribute("background-color", "#ff0000"); //background-color: #ff0000;
-*@        }, timer);
+    @*
+                document.getElementById("buttonSnoozeId").setAttribute("disabled", false);
+                document.getElementById("buttonSnoozeId").disabled = false;
+                document.getElementById("buttonSnoozeId").setAttribute("background-color", "#ff0000"); //background-color: #ff0000;
+    *@        }, timer);
+        }
     }
 
     // Close the dropdown menu if the user clicks outside of it

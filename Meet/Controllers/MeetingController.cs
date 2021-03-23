@@ -18,10 +18,10 @@ namespace Meet.Controllers
 
         // GET: /Meeting/Search?name=Abhishek&meetingId=4 
 
-        public IActionResult Search(string meetingId, string name, int time, long actionTime, bool isSnoozed)
+        public IActionResult Search(string meetingId, string name, string alias, int? time = null, long? actionTime = null, bool? isSnoozed = false)
         {
             var userid = "user12345"; //To be fetched from backend using alias
-            var model = new MeetingSearchModel(meetingId, userid, name, time, actionTime, isSnoozed);
+            var model = new MeetingSearchModel(meetingId, userid, name, alias, time, actionTime, isSnoozed);
             return View("MeetingPageView", model);
         }
 
@@ -42,13 +42,12 @@ namespace Meet.Controllers
         }
 
         // GET: /Meeting/Snooze?userId=1234&meetingId=4&time=5 
-        public IActionResult Snooze(string meetingId, string userId, int time, long actionTime)
+        public IActionResult Snooze(string meetingId, string name, string alias, int time, long actionTime)
         {
             // TODO : emit userData here
 
-            return Search(meetingId, userId, time, actionTime, true);
-/*            return HtmlEncoder.Default.Encode($"User {userId} has snoozed the meeting : {meetingId} for {time} minutes at time {actionTime}");
-*/        }
+            return Search(meetingId, name, alias, time, actionTime, true);
+        }
 
         // GET: /Meeting/ParticipantStatus?meetingId=4 
         public string ParticipantStatus(string meetingId)
