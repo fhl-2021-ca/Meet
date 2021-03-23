@@ -4,7 +4,7 @@ namespace Meet.Models
 {
     public class MeetingSearchModel
     {
-        public string MeetingId { get; set; }
+        public int MeetingId { get; set; }
 
         public string UserId { get; set; }
 
@@ -18,7 +18,7 @@ namespace Meet.Models
 
         public bool? isSnoozed { get; set; }
 
-        public MeetingSearchModel(string meetingId, string userId, string name, string alias, int? duration, long? actionTime, bool? isSnoozed)
+        public MeetingSearchModel(int meetingId, string userId, string name, string alias, int? duration, long? actionTime, bool? isSnoozed)
         {
             MeetingId = meetingId;
             UserId = userId;

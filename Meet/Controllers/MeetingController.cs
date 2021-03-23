@@ -16,7 +16,7 @@ namespace Meet.Controllers
             return View();
         }
 
-        // GET: /Meeting/Search?name=Abhishek&meetingId=4 
+        // GET: /Meeting/Search?name=Abhishek&alias=dummy&meetingId=4 
 
         public IActionResult Search(string meetingId, string name, string alias, int? time = null, long? actionTime = null, bool? isSnoozed = false)
         {
