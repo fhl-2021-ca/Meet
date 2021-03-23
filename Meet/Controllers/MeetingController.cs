@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Meet.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,8 +20,8 @@ namespace Meet.Controllers
 
         public IActionResult Search(string meetingId, string name)
         {
-            return View();
-            //return HtmlEncoder.Default.Encode($"Hello {name}, Meeting ID is: {meetingId}");
+            var model = new MeetingSearchModel(meetingId, name);
+            return View("MeetingPageView", model);
         }
 
         // GET: /Meeting/Join?userId=1234&meetingId=4 
