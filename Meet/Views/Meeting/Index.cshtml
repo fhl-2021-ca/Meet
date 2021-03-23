@@ -6,7 +6,8 @@
     function entermeeting() {
         var meetingId = document.getElementById("meeting").value;
         var username = document.getElementById("name").value;
-        window.location = "Meeting/Search?meetingId=" + meetingId + "&name=" + username;
+        var alias = document.getElementById("alias").value;
+        window.location = "Meeting/Search?meetingId=" + meetingId + "&name=" + username + "&alias=" + alias;
     }
 </script>
 
@@ -17,7 +18,7 @@
                 <table>
                     <tr>
                         <td style="width: 500px; text-align: center" colspan="2">
-                            <strong style="color:darkslateblue">Enter the meeting Id and name to join the meeting</strong>
+                            <strong style="color:darkslateblue">Enter the meeting Id, name and alias to join the meeting</strong>
                         </td>
                     </tr>
                 </table>
@@ -30,6 +31,14 @@
                     </td>
                     <td style="width: 100px">
                         <input type="text" id="meeting" name="meeting">
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 200px; text-align: right">
+                        <strong style="color:firebrick">Alias</strong>:
+                    </td>
+                    <td style="width: 100px">
+                        <input type="text" id="alias" name="alias">
                     </td>
                 </tr>
                 <tr>

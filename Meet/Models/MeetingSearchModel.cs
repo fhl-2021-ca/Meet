@@ -8,10 +8,13 @@ namespace Meet.Models
 
         public string UserId { get; set; }
 
-        public MeetingSearchModel(string meetingId, string userId)
+        public string Name { get; set; }
+
+        public MeetingSearchModel(string meetingId, string userId, string name)
         {
             MeetingId = meetingId;
             UserId = userId;
+            Name = name;
         }
     }
 }
