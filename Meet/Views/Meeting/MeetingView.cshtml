@@ -10,7 +10,7 @@
     table {
         font-family: arial, sans-serif;
         border-collapse: collapse;
-        width: 100%;
+        width: 30%;
     }
 
     td, th {
@@ -46,7 +46,7 @@
                     <td>@userAction.UserName</td>
                     @if (userAction.duration != null)
                     {
-                        <td>@userAction.duration</td>
+                        <td>@userAction.duration min</td>
                     }
                 </tr>
             }
@@ -55,8 +55,10 @@
 
     @if (@Model.lateUsers != null)
     {
+
         <div>Running late:</div>
         <table>
+            debugger;
             @foreach (var userAction in @Model.lateUsers)
             {
                 <tr>
