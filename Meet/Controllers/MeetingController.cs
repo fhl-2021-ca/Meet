@@ -26,11 +26,13 @@ namespace Meet.Controllers
         }
 
         // GET: /Meeting/Join?userId=1234&meetingId=4 
-        public string Join(string meetingId, string userId)
+        public IActionResult Join(string meetingId, string userId)
         {
             // TODO : emit userData here
-
-            return HtmlEncoder.Default.Encode($"User {userId} has joined the meeting : {meetingId}");
+            var name = "dummy";
+            var alias = "testalias";
+            var model = new MeetingSearchModel(meetingId, userId, name, alias, null, null, false);
+            return View("MeetingView", model);
         }
 
         // GET: /Meeting/Decline?userId=1234&meetingId=4 

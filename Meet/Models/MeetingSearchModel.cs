@@ -20,10 +20,10 @@ namespace Meet.Models
 
         public MeetingSearchModel(string meetingId, string userId, string name, string alias, int? duration, long? actionTime, bool? isSnoozed)
         {
-            MeetingId = meetingId;
-            UserId = userId;
-            Name = name;
-            Alias = alias;
+            this.MeetingId = meetingId;
+            this.UserId = userId;
+            this.Name = name;
+            this.Alias = alias;
             this.duration = duration;
             this.actionTime = actionTime;
             this.isSnoozed = isSnoozed;
