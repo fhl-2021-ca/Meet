@@ -29,7 +29,7 @@ namespace Meet.Controllers
         public IActionResult Join(string meetingId, string userId)
         {
             // TODO : emit userData here
-            var name = "dummy";
+            var name = "dummyName";
             var alias = "testalias";
             var model = new MeetingSearchModel(meetingId, userId, name, alias, null, null, false);
             return View("MeetingView", model);
