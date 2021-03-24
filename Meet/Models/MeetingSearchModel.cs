@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Meet.Models
 {
@@ -18,7 +19,15 @@ namespace Meet.Models
 
         public bool? isSnoozed { get; set; }
 
-        public MeetingSearchModel(string meetingId, string userId, string name, string alias, int? duration, long? actionTime, bool? isSnoozed)
+        public List<UserAction>? userActions { get; set; }
+
+        public List<UserAction>? joinedUsers { get; set; }
+        public List<UserAction>? lateUsers { get; set; }
+        public List<UserAction>? declinedUsers { get; set; }
+        public List<UserAction>? noResponseUsers { get; set; }
+
+
+        public MeetingSearchModel(string meetingId, string userId, string name, string alias, List<UserAction>? userActions, int? duration, long? actionTime, bool? isSnoozed)
         {
             this.MeetingId = meetingId;
             this.UserId = userId;
@@ -27,6 +36,7 @@ namespace Meet.Models
             this.duration = duration;
             this.actionTime = actionTime;
             this.isSnoozed = isSnoozed;
+            this.userActions = userActions;
         }
     }
 }

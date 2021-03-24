@@ -1,9 +1,25 @@
-﻿@{
+﻿
+@{
     ViewData["Title"] = "Meeting";
 }
 
 <script>
 </script>
+<style>
+
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 0px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+</style>
 
 <body>
     <form id="form3" runat="server">
@@ -20,4 +36,75 @@
             <br />
         </div>
     </form>
+    @if (@Model.joinedUsers != null)
+    {
+        <div>In meeting:</div>
+        <table>
+            @foreach (var userAction in @Model.joinedUsers)
+            {
+                <tr>
+                    <td>@userAction.UserName</td>
+                    @if (userAction.duration != null)
+                    {
+                        <td>@userAction.duration</td>
+                    }
+                </tr>
+            }
+        </table>
+    }
+
+    @if (@Model.lateUsers != null)
+    {
+        <div>Running late:</div>
+        <table>
+            @foreach (var userAction in @Model.lateUsers)
+            {
+                <tr>
+                    <td>@userAction.UserName</td>
+                    @if (userAction.duration != null)
+                    {
+                        <td>@userAction.duration</td>
+                    }
+                </tr>
+            }
+        </table>
+    }
+
+
+    @if (@Model.declinedUsers != null)
+    {
+        <div>Declined:</div>
+        <table>
+            @foreach (var userAction in @Model.declinedUsers)
+            {
+                <tr>
+                    <td>@userAction.UserName</td>
+                    @if (userAction.duration != null)
+                    {
+                        <td>@userAction.duration</td>
+                    }
+                </tr>
+            }
+        </table>
+    }
+
+
+    @if (@Model.noResponseUsers != null)
+    {
+        <div>Not responded:</div>
+        <table>
+            @foreach (var userAction in @Model.noResponseUsers)
+            {
+                <tr>
+                    <td>@userAction.UserName</td>
+                    @if (userAction.duration != null)
+                    {
+                        <td>@userAction.duration</td>
+                    }
+                </tr>
+            }
+        </table>
+    }
+
+
 </body>
