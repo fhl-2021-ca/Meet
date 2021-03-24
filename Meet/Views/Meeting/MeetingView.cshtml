@@ -37,85 +37,81 @@
                         </td>
                     </tr>
                 </table>
-                <div align="right" width="25%">
-                    @if (@Model.joinedUsers != null)
-                    {
-                        <label>In meeting:</label>
-                            @foreach (var userAction in @Model.joinedUsers)
-                            {
-                                <table>
-                                    <tr>
-                                        <td>@userAction.UserName</td>
-                                        @if (userAction.duration != null)
-                                        {
-                                            <td>@userAction.duration min</td>
-                                        }
-                                    </tr>
-                                </table>
-                            }
-                    }
-
-                    @if (@Model.lateUsers != null)
-                    {
-
-                        <label>Running late:</label>
-                            @foreach (var userAction in @Model.lateUsers)
-                            {
-                                <table>
-                                    <tr>
-                                        <td>@userAction.UserName</td>
-                                        @if (userAction.duration != null)
-                                        {
-                                            <td>@userAction.duration</td>
-                                        }
-                                    </tr>
-                                </table>
-                            }
-                    }
-
-
-                    @if (@Model.declinedUsers != null)
-                    {
-                        <label>Declined:</label>
-                            @foreach (var userAction in @Model.declinedUsers)
-                            {
-                                <table>
-                                    <tr>
-                                        <td>@userAction.UserName</td>
-                                        @if (userAction.duration != null)
-                                        {
-                                            <td>@userAction.duration</td>
-                                        }
-                                    </tr>
-                                </table>
-                            }
-                    }
-
-
-                    @if (@Model.noResponseUsers != null)
-                    {
-                        <div>Others invited:</div>
-                            @foreach (var userAction in @Model.noResponseUsers)
-                            {
-                                <table>
-                                    <tr>
-                                        <td>@userAction.UserName</td>
-                                        @if (userAction.duration != null)
-                                        {
-                                            <td>@userAction.duration</td>
-                                        }
-                                    </tr>
-                                </table>
-                            }
-                    }
-                </div>
-
-
-
             </div>
             <br />
         </div>
     </form>
+    @if (@Model.joinedUsers != null)
+    {
+        <div>In meeting:</div>
+        <table>
+            @foreach (var userAction in @Model.joinedUsers)
+            {
+                <tr>
+                    <td>@userAction.UserName</td>
+                    @if (userAction.duration != null)
+                    {
+                        <td>@userAction.duration min</td>
+                    }
+                </tr>
+            }
+        </table>
+    }
+
+    @if (@Model.lateUsers != null)
+    {
+
+        <div>Running late:</div>
+        <table>
+            debugger;
+            @foreach (var userAction in @Model.lateUsers)
+            {
+                <tr>
+                    <td>@userAction.UserName</td>
+                    @if (userAction.duration != null)
+                    {
+                        <td>@userAction.duration</td>
+                    }
+                </tr>
+            }
+        </table>
+    }
+
+
+    @if (@Model.declinedUsers != null)
+    {
+        <div>Declined:</div>
+        <table>
+            @foreach (var userAction in @Model.declinedUsers)
+            {
+                <tr>
+                    <td>@userAction.UserName</td>
+                    @if (userAction.duration != null)
+                    {
+                        <td>@userAction.duration</td>
+                    }
+                </tr>
+            }
+        </table>
+    }
+
+
+    @if (@Model.noResponseUsers != null)
+    {
+        <div>Not responded:</div>
+        <table>
+            @foreach (var userAction in @Model.noResponseUsers)
+            {
+                <tr>
+                    <td>@userAction.UserName</td>
+                    @if (userAction.duration != null)
+                    {
+                        <td>@userAction.duration</td>
+                    }
+                </tr>
+            }
+        </table>
+    }
 
 
 </body>
