@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewData["Title"] = "Meeting";
+}
+
+<script>
+</script>
+<style>
+
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 0px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+</style>
+
+<body>
+    <form id="form3" runat="server">
+        <div>
+            <div>
+                <table>
+                    <tr>
+                        <td style="width: 500px; text-align: center" colspan="2">
+                            <strong style="color:darkslateblue">Meeting : @Model.MeetingId in progress</strong>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <br />
+        </div>
+    </form>
+    @if(@Model.joinedUsers != null) {
+        <div>Joined Users</div>
+        <table>
+            @foreach (var userAction in @Model.joinedUsers)
+            {
+            <tr>
+                <td>userAction.UserName</td>
+                @if (userAction.duration != null)
+                {
+                    <td>Maria Anders</td>
+                }
+                </tr>
+            }
+
+
+        </table>
+    }
+
+
+</body>

@@ -1,0 +1,161 @@
+﻿@{
+    ViewData["Title"] = "MeetingPageView";
+
+}
+
+<style>
+    .button {
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+
+    /* Green */
+    .buttonJoin {
+        background-color: #4CAF50;
+    }
+
+    /* Red */
+    .buttonDecline {
+        background-color: #ff0000;
+    }
+
+    /* Blue */
+    .buttonSnooze {
+        background-color: #ff0000;
+    }
+
+    /* Dropdown Button */
+    .dropbtn {
+        background-color: #3498DB;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+    }
+
+    /* Dropdown button on hover & focus */
+    .dropbtn:hover, .dropbtn:focus {
+        background-color: #2980B9;
+    }
+
+    /* The container <div> - needed to position the dropdown content */
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 130px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+    /* Links inside the dropdown */
+    .dropdown-content div {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    /* Change color of dropdown links on hover */
+    .dropdown-content div:hover {
+        background-color: #ddd
+    }
+
+    /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+    .show {
+        display: block;
+    }
+
+</style>
+
+<script>
+    document.onload = load();
+
+    function load() {
+        debugger;
+        if ('@Model.isSnoozed') {
+            // Hack : run after 0.5 second.
+            setTimeout(function () {
+                snoozeRunning();
+            }, 500);
+        }
+    }
+
+    function clickDecline() {
+        // TODO : emit userData here
+        window.location = "Decline?meetingId=" + '@Model.MeetingId' + "&userId=" + '@Model.UserId';
+    }
+
+    function clickJoin() {
+        window.location = "Join?meetingId=" + '@Model.MeetingId' + "&userId=" + '@Model.UserId';
+    }
+
+    /* When the user clicks on the button, toggle between hiding and showing the dropdown content */
+    function clickSnooze() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    function snoozeTimeSelected(event) {
+        var d = new Date();
+        console.log("snoozed by" + event.id + "minutes");
+        window.location = "Snooze?meetingId=" + '@Model.MeetingId' + "&userId=" + '@Model.UserId' + "&time=" + event.id
+            + "&actionTime=" + d.getTime();
+    }
+
+    function snoozeRunning() {
+        console.log("running snooze logic");
+        var d = new Date();
+        var n = d.getTime();
+        debugger;
+        var timer = n - '@Model.actionTime'
+        document.getElementsByClassName("buttonSnooze").setAttribute("disabled", true);
+        document.getElementsByClassName("buttonSnooze").setAttribute("background-color", "#808080"); //background-color: #ff0000;
+        document.getElementsByClassName("buttonSnooze").disabled = true;
+        debugger;
+        setTimeout(function () {
+            document.getElementsByClassName("buttonSnooze").setAttribute("disabled", false);
+            document.getElementsByClassName("buttonSnooze").disabled = false;
+            document.getElementsByClassName("myDropdown").setAttribute("background-color", "#ff0000"); //background-color: #ff0000;
+        }, timer);
+    }
+
+    // Close the dropdown menu if the user clicks outside of it
+    window.onclick = function (event) {
+        if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+</script>
+
+<h1>MeetingPageView</h1>
+<button class="button buttonJoin" onclick="clickJoin()">Join</button>
+<div class="dropdown">
+    <div class="button buttonSnooze dropbtn" onclick="clickSnooze()">Running Late</div>
+    <div id="myDropdown" class="dropdown-content">
+        <div id="2" onclick="snoozeTimeSelected(this)">2 min</div>
+        <div id="5" onclick="snoozeTimeSelected(this)">5 min</div>
+        <div id="10" onclick="snoozeTimeSelected(this)">10 min</div>
+    </div>
+ </div>
+ <button class="button buttonDecline" onclick="clickDecline()">Decline</button>

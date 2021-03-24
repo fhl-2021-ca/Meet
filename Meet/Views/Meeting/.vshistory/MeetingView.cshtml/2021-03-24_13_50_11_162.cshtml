@@ -43,15 +43,15 @@
                         <label>In meeting:</label>
                             @foreach (var userAction in @Model.joinedUsers)
                             {
-                                <table>
-                                    <tr>
-                                        <td>@userAction.UserName</td>
-                                        @if (userAction.duration != null)
-                                        {
-                                            <td>@userAction.duration min</td>
-                                        }
-                                    </tr>
-                                </table>
+                <table>
+                    <tr>
+                        <td>@userAction.UserName</td>
+                        @if (userAction.duration != null)
+                        {
+                            <td>@userAction.duration min</td>
+                        }
+                    </tr>
+                </table>
                             }
                     }
 
@@ -61,15 +61,13 @@
                         <label>Running late:</label>
                             @foreach (var userAction in @Model.lateUsers)
                             {
-                                <table>
-                                    <tr>
-                                        <td>@userAction.UserName</td>
-                                        @if (userAction.duration != null)
-                                        {
-                                            <td>@userAction.duration</td>
-                                        }
-                                    </tr>
-                                </table>
+                                <tr>
+                                    <td>@userAction.UserName</td>
+                                    @if (userAction.duration != null)
+                                    {
+                                        <td>@userAction.duration</td>
+                                    }
+                                </tr>
                             }
                     }
 
@@ -79,15 +77,13 @@
                         <label>Declined:</label>
                             @foreach (var userAction in @Model.declinedUsers)
                             {
-                                <table>
-                                    <tr>
-                                        <td>@userAction.UserName</td>
-                                        @if (userAction.duration != null)
-                                        {
-                                            <td>@userAction.duration</td>
-                                        }
-                                    </tr>
-                                </table>
+                                <tr>
+                                    <td>@userAction.UserName</td>
+                                    @if (userAction.duration != null)
+                                    {
+                                        <td>@userAction.duration</td>
+                                    }
+                                </tr>
                             }
                     }
 
@@ -97,15 +93,13 @@
                         <div>Others invited:</div>
                             @foreach (var userAction in @Model.noResponseUsers)
                             {
-                                <table>
-                                    <tr>
-                                        <td>@userAction.UserName</td>
-                                        @if (userAction.duration != null)
-                                        {
-                                            <td>@userAction.duration</td>
-                                        }
-                                    </tr>
-                                </table>
+                                <tr>
+                                    <td>@userAction.UserName</td>
+                                    @if (userAction.duration != null)
+                                    {
+                                        <td>@userAction.duration</td>
+                                    }
+                                </tr>
                             }
                     }
                 </div>
