@@ -29,7 +29,7 @@ namespace Meet.Controllers
         public IActionResult Join(string meetingId, string userId)
         {
             // TODO : emit userData here
-            var name = "dummy";
+            var name = "dummyName";
             var alias = "testalias";
             List<UserAction> userActions = new List<UserAction>();
             userActions.Add(new UserAction(132, "Joined User", "alias1",  "Joined"));

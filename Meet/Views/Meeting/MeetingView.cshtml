@@ -25,10 +25,15 @@
     <form id="form3" runat="server">
         <div>
             <div>
-                <table>
+                <table align="left" width="75%">
                     <tr>
-                        <td style="width: 500px; text-align: center" colspan="2">
+                        <td style="width: 75%; text-align: center">
                             <strong style="color:darkslateblue">Meeting : @Model.MeetingId in progress</strong>
+                        </td>
+                    </tr>
+                    <tr style="height: 400px; background-color : black">
+                        <td style="width: 75%; text-align: center;">
+                            <strong style="color:white">@Model.Name</strong>
                         </td>
                     </tr>
                 </table>
