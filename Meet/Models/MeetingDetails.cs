@@ -9,6 +9,8 @@ namespace Meet.Models
     {
         public int MeetingId { get; set; }
 
+        public int UserId { get; set; }
+
         public string MeetingTitle { get; set; }
 
         public string Organizer { get; set; }

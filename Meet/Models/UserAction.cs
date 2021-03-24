@@ -9,13 +9,13 @@ namespace Meet.Models
     {
         public int MeetingId { get; set; }
 
+        public int UserId { get; set; }
+
         public string UserName { get; set; }
 
         public int Status { get; set; }
 
         public int? duration { get; set; }
-
-        public long? actionTime { get; set; }
 
 
     }

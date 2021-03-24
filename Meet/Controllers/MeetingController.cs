@@ -20,7 +20,10 @@ namespace Meet.Controllers
 
         public IActionResult Search(string meetingId, string name, string alias, int? time = null, long? actionTime = null, bool? isSnoozed = false)
         {
-            var userid = "user12345"; //To be fetched from backend using alias
+            var userid = "user12345"; 
+            // retrun meeting details
+            // check if meeting is valid
+            // upsert user details
             var model = new MeetingSearchModel(meetingId, userid, name, alias, time, actionTime, isSnoozed);
             return View("MeetingPageView", model);
         }
