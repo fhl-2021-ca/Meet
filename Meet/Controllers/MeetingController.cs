@@ -1,4 +1,5 @@
 ﻿using Meet.Models;
+using Meet.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,20 @@ namespace Meet.Controllers
 {
     public class MeetingController : Controller
     {
+
+        /// <summary>
+        /// The rest activity
+        /// </summary>
+        private readonly IMeetRepository repository;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MeetingController"/> class.
+        /// </summary>
+        public MeetingController(IMeetRepository repository)
+        {
+            this.repository = repository;
+        }
+
         // GET: /Meeting/
         public IActionResult Index()
         {
@@ -20,11 +35,17 @@ namespace Meet.Controllers
 
         public IActionResult Search(string meetingId, string name, string alias, int? time = null, long? actionTime = null, bool? isSnoozed = false)
         {
-            var userid = "user12345"; 
-            // retrun meeting details
-            // check if meeting is valid
-            // upsert user details
-            var model = new MeetingSearchModel(meetingId, userid, name, alias, time, actionTime, isSnoozed);
+            //var userid = "user12345";
+
+            //Update user details
+            this.repository.UpdateUserDetails(name, alias);
+
+
+            // update default status to invited
+
+            //Check for Valid meeting and return meeting model
+            var model = repository.GetMeetingDetails((Int16.Parse(meetingId)), alias);
+
             return View("MeetingPageView", model);
         }
 

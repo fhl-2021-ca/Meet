@@ -21,15 +21,15 @@ namespace Meet.Models
 
         public List<UserAction>? userActions { get; set; }
 
-        public List<UserAction>? joinedUsers { get; set; }
-        public List<UserAction>? lateUsers { get; set; }
-        public List<UserAction>? declinedUsers { get; set; }
-        public List<UserAction>? noResponseUsers { get; set; }
+        public List<UserAction> joinedUsers { get; set; }
+        public List<UserAction> lateUsers { get; set; }
+        public List<UserAction> declinedUsers { get; set; }
+        public List<UserAction> noResponseUsers { get; set; }
 
 
         public MeetingSearchModel(string meetingId, string userId, string name, string alias, List<UserAction>? userActions, int? duration, long? actionTime, bool? isSnoozed)
         {
-            this.MeetingId = meetingId;
+            this.MeetingId = Int16.Parse(meetingId);
             this.UserId = userId;
             this.Name = name;
             this.Alias = alias;

@@ -11,5 +11,7 @@ namespace Meet.Models
 
         public string UserAlias { get; set; }
 
+        public int UserId { get; set; }
+
     }
 }
