@@ -111,8 +111,7 @@
     function snoozeTimeSelected(event) {
         var d = new Date();
         console.log("snoozed by" + event.id + "minutes");
-        window.location = "Snooze?meetingId=" + '@Model.MeetingId' + "&alias=" + '@Model.UserAlias' + "&name=" + '@Model.UserName' + "&time=" + event.id
-            + "&actionTime=" + d.getTime();
+        window.location = "Snooze?meetingId=" + '@Model.MeetingId' + "&alias=" + '@Model.UserAlias'  + "&time=" + event.id;
     }
 
     function snoozeRunning() {

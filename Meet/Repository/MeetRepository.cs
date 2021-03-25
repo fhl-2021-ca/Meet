@@ -101,7 +101,7 @@ namespace Meet.Repository
             return user;
         }
 
-        public int UpdateUserDetails(string name, string alias)
+        public void UpdateUserDetails(string name, string alias)
         {
             SqlConnection con = new SqlConnection("Server=tcp:fhl2021.database.windows.net,1433;Initial Catalog=TeamsProject-FHL;Persist Security Info=False;User ID=defaultuser;Password=Helloworld@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             SqlCommand cmd;
@@ -118,8 +118,6 @@ namespace Meet.Repository
             }
 
             con.Close();
-            int ID = Convert.ToInt32(ds.Tables[0].Rows[0]["ID"]);
-            return ID;
         }
 
         public int GetUserIdFromAlias(string alias)
@@ -156,7 +154,7 @@ namespace Meet.Repository
             return;
         }
 
-        public void UpdateParticipantStatus(int meetingId, int userId, int status)
+        public void UpdateParticipantStatus(int meetingId, int userId, int Status, int? time)
         {
             SqlConnection con = new SqlConnection("Server=tcp:fhl2021.database.windows.net,1433;Initial Catalog=TeamsProject-FHL;Persist Security Info=False;User ID=defaultuser;Password=Helloworld@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             SqlCommand cmd;
@@ -168,7 +166,14 @@ namespace Meet.Repository
             if (ds.Tables[0].Rows.Count > 0)
             {
                 con.Open();
-                cmd = new SqlCommand($"update UserAction set status = {status}  where UserId = {userId} and MeetingId = {meetingId}", con);
+                if((int)status.Snooze == Status)
+                {
+                    cmd = new SqlCommand($"update UserAction set status = {Status} , Timerduration = {time}  where UserId = {userId} and MeetingId = {meetingId}", con);
+                }
+                else
+                {
+                    cmd = new SqlCommand($"update UserAction set status = {Status}  where UserId = {userId} and MeetingId = {meetingId}", con);
+                }
                 cmd.ExecuteNonQuery();
             }
 

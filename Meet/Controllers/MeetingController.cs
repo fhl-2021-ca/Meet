@@ -38,7 +38,8 @@ namespace Meet.Controllers
             //var userid = "user12345";
 
             //Update user details
-            var userID = this.repository.UpdateUserDetails(name, alias);
+            this.repository.UpdateUserDetails(name, alias);
+            var userID = this.repository.GetUserIdFromAlias(alias);
 
 
             // update default status to invited
@@ -57,7 +58,7 @@ namespace Meet.Controllers
             var userID = repository.GetUserIdFromAlias(alias);
 
             //Update status
-            this.repository.UpdateParticipantStatus((Int32.Parse(meetingId)), userID, (int)status.Joined);
+            this.repository.UpdateParticipantStatus((Int32.Parse(meetingId)), userID, (int)status.Joined, null);
 
             // TODO : emit userData here
             var model = repository.GetMeetingDetails((Int16.Parse(meetingId)), alias);
@@ -80,7 +81,7 @@ namespace Meet.Controllers
             var userID = repository.GetUserIdFromAlias(alias);
 
             //Update status
-            this.repository.UpdateParticipantStatus((Int32.Parse(meetingId)), userID, (int)status.Declined);
+            this.repository.UpdateParticipantStatus((Int32.Parse(meetingId)), userID, (int)status.Declined, null);
 
             // TODO : emit userData here
             var model = repository.GetMeetingDetails((Int16.Parse(meetingId)), alias);
@@ -89,11 +90,18 @@ namespace Meet.Controllers
         }
 
         // GET: /Meeting/Snooze?userId=1234&meetingId=4&time=5 
-        public IActionResult Snooze(string meetingId, string name, string alias, int time, long actionTime)
+        public IActionResult Snooze(string meetingId, string alias, int? time)
         {
-            // TODO : emit userData here
+            //Get user details
+            var userID = repository.GetUserIdFromAlias(alias);
 
-            return Search(meetingId, name, alias, time, actionTime, true);
+            //Update status
+            this.repository.UpdateParticipantStatus((Int32.Parse(meetingId)), userID, (int)status.Snooze, time);
+
+            // TODO : emit userData here
+            var model = repository.GetMeetingDetails((Int16.Parse(meetingId)), alias);
+
+            return View("MeetingPageView", model);
         }
 
         // GET: /Meeting/ParticipantStatus?meetingId=4 
