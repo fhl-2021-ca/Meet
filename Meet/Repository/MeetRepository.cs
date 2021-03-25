@@ -57,9 +57,10 @@ namespace Meet.Repository
                 {
                     UserAction action = new UserAction();
                     action.MeetingId = (int)oReader["MeetingId"];
-                    action.UserName = GetUserDetails(alias).UserName;
-                    action.UserId = GetUserDetails(alias).UserId;
-                    action.Alias = GetUserDetails(alias).UserAlias;
+                    var userId = (int)oReader["UserId"];
+                    action.UserName = GetUserDetailsFromUserId(userId).UserName;
+                    action.UserId = GetUserDetailsFromUserId(userId).UserId;
+                    action.Alias = GetUserDetailsFromUserId(userId).UserAlias;
                     action.status = (status)oReader["Status"];
                     action.duration = Convert.IsDBNull(oReader["TimerDuration"]) ? null : (int?)oReader["TimerDuration"];
                     details.Add(action);
@@ -79,6 +80,37 @@ namespace Meet.Repository
             using (SqlConnection myConnection = new SqlConnection(con))
             {
                 string oString = $"Select * from dbo.UserDetails where UserAlias='{alias}'";
+                SqlCommand oCmd = new SqlCommand(oString, myConnection);
+                myConnection.Open();
+                using (SqlDataReader oReader = oCmd.ExecuteReader())
+                {
+                    if (oReader.HasRows)
+                    {
+                        while (oReader.Read())
+                        {
+                            user.UserName = oReader["UserName"].ToString();
+                            user.UserAlias = oReader["UserAlias"].ToString();
+                            user.UserId = (int)oReader["ID"];
+
+                        }
+                    }
+
+
+                    myConnection.Close();
+                }
+            }
+            return user;
+        }
+
+        private UserDetails GetUserDetailsFromUserId(int userId)
+        {
+            UserDetails user = new UserDetails();
+            var con = ConfigurationManager.ConnectionStrings["SqlServerConnectionString"].ToString();
+
+            MeetingDetails details = new MeetingDetails();
+            using (SqlConnection myConnection = new SqlConnection(con))
+            {
+                string oString = $"Select * from dbo.UserDetails where ID='{userId}'";
                 SqlCommand oCmd = new SqlCommand(oString, myConnection);
                 myConnection.Open();
                 using (SqlDataReader oReader = oCmd.ExecuteReader())
