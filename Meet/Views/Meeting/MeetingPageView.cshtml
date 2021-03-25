@@ -111,7 +111,7 @@
     function snoozeTimeSelected(event) {
         var d = new Date();
         console.log("snoozed by" + event.id + "minutes");
-        window.location = "Snooze?meetingId=" + '@Model.MeetingId' + "&alias=" + '@Model.Alias' + "&name=" + '@Model.Name' + "&time=" + event.id
+        window.location = "Snooze?meetingId=" + '@Model.MeetingId' + "&alias=" + '@Model.UserAlias' + "&name=" + '@Model.UserName' + "&time=" + event.id
             + "&actionTime=" + d.getTime();
     }
 
@@ -157,7 +157,7 @@
 </script>
 <h3 style="text-align:center">Meeting Options</h3>
 <div style="text-align:center;padding-top:13%;padding-left:5%">
-    <h4>Hi @Model.Name, please select one of the options below.</h4>
+    <h4>Hi @Model.UserName, please select one of the options below.</h4>
     <button class="button buttonJoin" onclick="clickJoin()">Join</button>
     <div class="dropdown">
         <button id="buttonSnoozeId" class="button buttonSnooze dropbtn" onclick="clickSnooze()">Running Late</button>
