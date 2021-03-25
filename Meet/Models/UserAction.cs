@@ -15,11 +15,11 @@ namespace Meet.Models
 
         public string Alias { get; set; }
 
-        public string status { get; set; }
+        public status status { get; set; }
 
         public int? duration { get; set; }
 
-        public UserAction(int meetingId, string userName, string alias, string status, int? duration = null, long? actionTime = null)
+        public UserAction(int meetingId, string userName, string alias, status status, int? duration = null, long? actionTime = null)
         {
             MeetingId = meetingId;
             UserName = userName;
@@ -31,5 +31,14 @@ namespace Meet.Models
         public UserAction()
         {
         }
+
     }
+
+        public enum status
+        {
+            Joined = 0,
+            Declined,
+            Snooze,
+            AwaitingResponses
+        }
 }

@@ -56,10 +56,10 @@ namespace Meet.Controllers
             var name = "dummyName";
             var alias = "testalias";
             List<UserAction> userActions = new List<UserAction>();
-            userActions.Add(new UserAction(132, "Joined User", "alias1",  "Joined"));
-            userActions.Add(new UserAction(132, "Declined User", "alias2", "Declined"));
-            userActions.Add(new UserAction(132, "Late User", "alias3", "Late", 5));
-            userActions.Add(new UserAction(132, "NoResponse User", "alias4" , "Invited"));
+            userActions.Add(new UserAction(132, "Joined User", "alias1",  status.Joined));
+            userActions.Add(new UserAction(132, "Declined User", "alias2", status.Declined));
+            userActions.Add(new UserAction(132, "Late User", "alias3", status.Snooze, 5));
+            userActions.Add(new UserAction(132, "NoResponse User", "alias4" , status.AwaitingResponses));
 
             var model = new MeetingSearchModel(meetingId, userId, name, alias, userActions, null, null, false);
             model.joinedUsers = userActions.FindAll(x => x.status.Equals("Joined"));

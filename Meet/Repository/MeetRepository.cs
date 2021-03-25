@@ -61,7 +61,7 @@ namespace Meet.Repository
                         action.UserName = GetUserDetails(alias).UserName;
                         action.UserId = GetUserDetails(alias).UserId;
                         action.Alias = GetUserDetails(alias).UserAlias;
-                        action.status = oReader["Status"].ToString();
+                        action.status = (status)oReader["Status"];
                         action.duration = (int)oReader["TimerDuration"];
                         details.Add(action);
                     }
