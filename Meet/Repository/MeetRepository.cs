@@ -122,6 +122,20 @@ namespace Meet.Repository
             return ID;
         }
 
+        public int GetUserIdFromAlias(string alias)
+        {
+            SqlConnection con = new SqlConnection("Server=tcp:fhl2021.database.windows.net,1433;Initial Catalog=TeamsProject-FHL;Persist Security Info=False;User ID=defaultuser;Password=Helloworld@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+            SqlCommand cmd;
+
+            SqlDataAdapter da = new SqlDataAdapter($"Select * from dbo.UserDetails where UserAlias='{alias}'", con);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+
+            con.Close();
+            int ID = Convert.ToInt32(ds.Tables[0].Rows[0]["ID"]);
+            return ID;
+        }
+
         public void UpdateParticipantAwaitingStatus(int meetingId, int userId)
         {
             SqlConnection con = new SqlConnection("Server=tcp:fhl2021.database.windows.net,1433;Initial Catalog=TeamsProject-FHL;Persist Security Info=False;User ID=defaultuser;Password=Helloworld@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
@@ -135,6 +149,26 @@ namespace Meet.Repository
             {
                 con.Open();
                 cmd = new SqlCommand($"insert into UserAction (UserId,MeetingId,Status) values({userId}, {meetingId} , {(int)status.AwaitingResponses})", con);
+                cmd.ExecuteNonQuery();
+            }
+
+            con.Close();
+            return;
+        }
+
+        public void UpdateParticipantStatus(int meetingId, int userId, int status)
+        {
+            SqlConnection con = new SqlConnection("Server=tcp:fhl2021.database.windows.net,1433;Initial Catalog=TeamsProject-FHL;Persist Security Info=False;User ID=defaultuser;Password=Helloworld@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+            SqlCommand cmd;
+
+            SqlDataAdapter da = new SqlDataAdapter($"Select * from dbo.UserAction where UserId = {userId} and MeetingId = {meetingId}", con);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                con.Open();
+                cmd = new SqlCommand($"update UserAction set status = {status}  where UserId = {userId} and MeetingId = {meetingId}", con);
                 cmd.ExecuteNonQuery();
             }
 

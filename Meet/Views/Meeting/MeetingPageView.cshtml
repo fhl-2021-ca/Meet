@@ -96,11 +96,11 @@
 
     function clickDecline() {
         // TODO : emit userData here
-        window.location = "Decline?meetingId=" + '@Model.MeetingId' + "&userId=" + '@Model.UserId';
+        window.location = "Decline?meetingId=" + '@Model.MeetingId' + "&alias=" + '@Model.UserAlias';
     }
 
     function clickJoin() {
-        window.location = "Join?meetingId=" + '@Model.MeetingId' + "&alias=" + '@Model.UserName';
+        window.location = "Join?meetingId=" + '@Model.MeetingId' + "&alias=" + '@Model.UserAlias';
     }
 
     /* When the user clicks on the button, toggle between hiding and showing the dropdown content */

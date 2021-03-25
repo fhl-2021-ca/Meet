@@ -9,5 +9,9 @@ namespace Meet.Repository
         MeetingDetails GetMeetingDetails(int meetingId, string alias);
 
         void UpdateParticipantAwaitingStatus(int meetingId, int userId);
+
+        void UpdateParticipantStatus(int meetingId, int userId, int status);
+
+        int GetUserIdFromAlias(string alias);
     }
 }

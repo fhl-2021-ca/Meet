@@ -50,9 +50,15 @@ namespace Meet.Controllers
             return View("MeetingPageView", model);
         }
 
-        // GET: /Meeting/Join?userId=1234&meetingId=4 
+        // GET: /Meeting/Join?alias=1234&meetingId=4 
         public IActionResult Join(string meetingId, string alias)
         {
+            //Get user details
+            var userID = repository.GetUserIdFromAlias(alias);
+
+            //Update status
+            this.repository.UpdateParticipantStatus((Int32.Parse(meetingId)), userID, (int)status.Joined);
+
             // TODO : emit userData here
             var model = repository.GetMeetingDetails((Int16.Parse(meetingId)), alias);
 
@@ -67,12 +73,19 @@ namespace Meet.Controllers
             return View("MeetingView", model);
         }
 
-        // GET: /Meeting/Decline?userId=1234&meetingId=4 
-        public string Decline(string meetingId, string userId)
+        // GET: /Meeting/Decline?alias=1234&meetingId=4 
+        public string Decline(string meetingId, string alias)
         {
-            // TODO : emit userData here
+            //Get user details
+            var userID = repository.GetUserIdFromAlias(alias);
 
-            return HtmlEncoder.Default.Encode($"User {userId} has declined the meeting : {meetingId}");
+            //Update status
+            this.repository.UpdateParticipantStatus((Int32.Parse(meetingId)), userID, (int)status.Declined);
+
+            // TODO : emit userData here
+            var model = repository.GetMeetingDetails((Int16.Parse(meetingId)), alias);
+
+            return HtmlEncoder.Default.Encode($"User {alias} has declined the meeting : {meetingId}");
         }
 
         // GET: /Meeting/Snooze?userId=1234&meetingId=4&time=5 
