@@ -49,25 +49,23 @@ namespace Meet.Repository
             List<UserAction> details = new List<UserAction>();
             using (SqlConnection myConnection = new SqlConnection(con))
             {
-                string oString = $"Select * from dbo.UserAction where Id={meetingId}";
+                string oString = $"Select * from dbo.UserAction where MeetingId = {meetingId}";
                 SqlCommand oCmd = new SqlCommand(oString, myConnection);
                 myConnection.Open();
-                using (SqlDataReader oReader = oCmd.ExecuteReader())
+                using SqlDataReader oReader = oCmd.ExecuteReader();
+                while (oReader.Read())
                 {
-                    while (oReader.Read())
-                    {
-                        UserAction action = new UserAction();
-                        action.MeetingId = (int)oReader["MeetingId"];
-                        action.UserName = GetUserDetails(alias).UserName;
-                        action.UserId = GetUserDetails(alias).UserId;
-                        action.Alias = GetUserDetails(alias).UserAlias;
-                        action.status = (status)oReader["Status"];
-                        action.duration = (int)oReader["TimerDuration"];
-                        details.Add(action);
-                    }
-
-                    myConnection.Close();
+                    UserAction action = new UserAction();
+                    action.MeetingId = (int)oReader["MeetingId"];
+                    action.UserName = GetUserDetails(alias).UserName;
+                    action.UserId = GetUserDetails(alias).UserId;
+                    action.Alias = GetUserDetails(alias).UserAlias;
+                    action.status = (status)oReader["Status"];
+                    action.duration = Convert.IsDBNull(oReader["TimerDuration"]) ? null : (int?)oReader["TimerDuration"];
+                    details.Add(action);
                 }
+
+                myConnection.Close();
             }
             return details;
         }
@@ -103,7 +101,7 @@ namespace Meet.Repository
             return user;
         }
 
-        public void UpdateUserDetails(string name, string alias)
+        public int UpdateUserDetails(string name, string alias)
         {
             SqlConnection con = new SqlConnection("Server=tcp:fhl2021.database.windows.net,1433;Initial Catalog=TeamsProject-FHL;Persist Security Info=False;User ID=defaultuser;Password=Helloworld@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             SqlCommand cmd;
@@ -116,6 +114,27 @@ namespace Meet.Repository
             {
                 con.Open();
                 cmd = new SqlCommand("insert into UserDetails (UserName,UserAlias) values('" + name + "','" + alias + "')", con);
+                cmd.ExecuteNonQuery();
+            }
+
+            con.Close();
+            int ID = Convert.ToInt32(ds.Tables[0].Rows[0]["ID"]);
+            return ID;
+        }
+
+        public void UpdateParticipantAwaitingStatus(int meetingId, int userId)
+        {
+            SqlConnection con = new SqlConnection("Server=tcp:fhl2021.database.windows.net,1433;Initial Catalog=TeamsProject-FHL;Persist Security Info=False;User ID=defaultuser;Password=Helloworld@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+            SqlCommand cmd;
+
+            SqlDataAdapter da = new SqlDataAdapter($"Select * from dbo.UserAction where UserId = {userId} and MeetingId = {meetingId}", con);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+
+            if (ds.Tables[0].Rows.Count < 1)
+            {
+                con.Open();
+                cmd = new SqlCommand($"insert into UserAction (UserId,MeetingId,Status) values({userId}, {meetingId} , {(int)status.AwaitingResponses})", con);
                 cmd.ExecuteNonQuery();
             }
 

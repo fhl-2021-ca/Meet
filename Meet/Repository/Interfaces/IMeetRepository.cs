@@ -4,8 +4,10 @@ namespace Meet.Repository
 {
     public interface IMeetRepository
     {
-        void UpdateUserDetails(string name, string alias);
+        int UpdateUserDetails(string name, string alias);
 
         MeetingDetails GetMeetingDetails(int meetingId, string alias);
+
+        void UpdateParticipantAwaitingStatus(int meetingId, int userId);
     }
 }

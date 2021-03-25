@@ -36,7 +36,7 @@ namespace Meet.Models
 
         public enum status
         {
-            Joined = 0,
+            Joined = 1,
             Declined,
             Snooze,
             AwaitingResponses

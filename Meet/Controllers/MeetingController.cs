@@ -38,13 +38,14 @@ namespace Meet.Controllers
             //var userid = "user12345";
 
             //Update user details
-            this.repository.UpdateUserDetails(name, alias);
+            var userID = this.repository.UpdateUserDetails(name, alias);
 
 
             // update default status to invited
+            this.repository.UpdateParticipantAwaitingStatus((Int32.Parse(meetingId)), userID);
 
             //Check for Valid meeting and return meeting model
-            var model = repository.GetMeetingDetails((Int16.Parse(meetingId)), alias);
+            var model = repository.GetMeetingDetails((Int32.Parse(meetingId)), alias);
 
             return View("MeetingPageView", model);
         }
