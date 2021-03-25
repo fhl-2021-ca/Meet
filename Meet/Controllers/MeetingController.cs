@@ -103,7 +103,7 @@ namespace Meet.Controllers
 
             // TODO : emit userData here
             var model = repository.GetMeetingDetails((Int16.Parse(meetingId)), alias);
-
+            model.isSnoozed = true;
             return View("MeetingPageView", model);
         }
 
