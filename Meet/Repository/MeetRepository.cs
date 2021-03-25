@@ -25,7 +25,7 @@ namespace Meet.Repository
                 {
                     while (oReader.Read())
                     {
-                        details.MeetingId = (int)oReader["ID"];
+                        details.MeetingId = (int)oReader["Id"];
                         details.MeetingTitle = oReader["Title"].ToString();
                         details.Organizer = oReader["Organizer"].ToString();
                         details.IsActive = (bool)oReader["IsActive"];
