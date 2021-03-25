@@ -35,8 +35,6 @@ namespace Meet.Controllers
 
         public IActionResult Search(string meetingId, string name, string alias, int? time = null, long? actionTime = null, bool? isSnoozed = false)
         {
-            //var userid = "user12345";
-
             //Update user details
             this.repository.UpdateUserDetails(name, alias);
             var userID = this.repository.GetUserIdFromAlias(alias);

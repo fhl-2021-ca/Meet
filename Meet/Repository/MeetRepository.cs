@@ -125,8 +125,6 @@ namespace Meet.Repository
 
                         }
                     }
-
-
                     myConnection.Close();
                 }
             }
@@ -179,6 +177,13 @@ namespace Meet.Repository
             {
                 con.Open();
                 cmd = new SqlCommand($"insert into UserAction (UserId,MeetingId,Status) values({userId}, {meetingId} , {(int)status.AwaitingResponses})", con);
+                cmd.ExecuteNonQuery();
+            }
+            else
+            {
+                var statusInvited = (int)status.AwaitingResponses;
+                con.Open();
+                cmd = new SqlCommand($"update UserAction set status = {statusInvited} where UserId = {userId} and MeetingId = {meetingId}", con);
                 cmd.ExecuteNonQuery();
             }
 
