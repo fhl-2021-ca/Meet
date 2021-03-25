@@ -75,7 +75,7 @@ namespace Meet.Controllers
         }
 
         // GET: /Meeting/Decline?alias=1234&meetingId=4 
-        public string Decline(string meetingId, string alias)
+        public IActionResult Decline(string meetingId, string alias)
         {
             //Get user details
             var userID = repository.GetUserIdFromAlias(alias);
@@ -86,7 +86,7 @@ namespace Meet.Controllers
             // TODO : emit userData here
             var model = repository.GetMeetingDetails((Int16.Parse(meetingId)), alias);
 
-            return HtmlEncoder.Default.Encode($"User {alias} has declined the meeting : {meetingId}");
+            return View("Index");
         }
 
         // GET: /Meeting/Snooze?userId=1234&meetingId=4&time=5 
