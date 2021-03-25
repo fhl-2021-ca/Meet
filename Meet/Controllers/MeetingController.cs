@@ -51,22 +51,19 @@ namespace Meet.Controllers
         }
 
         // GET: /Meeting/Join?userId=1234&meetingId=4 
-        public IActionResult Join(string meetingId, string userId)
+        public IActionResult Join(string meetingId, string alias)
         {
             // TODO : emit userData here
-            var name = "dummyName";
-            var alias = "testalias";
-            List<UserAction> userActions = new List<UserAction>();
-            userActions.Add(new UserAction(132, "Joined User", "alias1",  status.Joined));
-            userActions.Add(new UserAction(132, "Declined User", "alias2", status.Declined));
-            userActions.Add(new UserAction(132, "Late User", "alias3", status.Snooze, 5));
-            userActions.Add(new UserAction(132, "NoResponse User", "alias4" , status.AwaitingResponses));
+            var model = repository.GetMeetingDetails((Int16.Parse(meetingId)), alias);
 
-            var model = new MeetingSearchModel(meetingId, userId, name, alias, userActions, null, null, false);
-            model.joinedUsers = userActions.FindAll(x => x.status.Equals("Joined"));
-            model.declinedUsers = userActions.FindAll(x => x.status.Equals("Declined"));
-            model.noResponseUsers = userActions.FindAll(x => x.status.Equals("Invited"));
-            model.lateUsers = userActions.FindAll(x => x.status.Equals("Late"));
+            List<UserAction> userActions = model.userActions;
+
+            if(userActions != null) { 
+                model.joinedUsers = userActions.FindAll(x => x.status == status.Joined);
+                model.declinedUsers = userActions.FindAll(x => x.status == status.Declined);
+                model.noResponseUsers = userActions.FindAll(x => x.status == status.AwaitingResponses);
+                model.lateUsers = userActions.FindAll(x => x.status == status.Snooze);
+            }
             return View("MeetingView", model);
         }
 
