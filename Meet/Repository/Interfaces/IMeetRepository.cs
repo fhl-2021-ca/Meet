@@ -10,7 +10,7 @@ namespace Meet.Repository
 
         void UpdateParticipantAwaitingStatus(int meetingId, int userId);
 
-        void UpdateParticipantStatus(int meetingId, int userId, int status, double? time);
+        void UpdateParticipantStatus(int meetingId, int userId, int status, long? time);
 
         int GetUserIdFromAlias(string alias);
     }

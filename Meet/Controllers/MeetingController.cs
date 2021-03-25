@@ -64,7 +64,7 @@ namespace Meet.Controllers
             var model = repository.GetMeetingDetails((Int16.Parse(meetingId)), alias);
 
             List<UserAction> userActions = model.userActions;
-            double unixTimestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            long unixTimestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
 
             if (userActions != null) { 
                 model.joinedUsers = userActions.FindAll(x => x.status == status.Joined);
@@ -96,8 +96,8 @@ namespace Meet.Controllers
         {
             //Get user details
             var userID = repository.GetUserIdFromAlias(alias);
-            double unixTimestamp = (DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-            double snoozedTill = (double)(time * 60) + unixTimestamp;
+            long unixTimestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            long snoozedTill = (long)(time * 60) + unixTimestamp;
             //Update status
             this.repository.UpdateParticipantStatus((Int32.Parse(meetingId)), userID, (int)status.Snooze, snoozedTill);
 

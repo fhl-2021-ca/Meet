@@ -17,9 +17,9 @@ namespace Meet.Models
 
         public status status { get; set; }
 
-        public double? duration { get; set; }
+        public long? duration { get; set; }
 
-        public UserAction(int meetingId, string userName, string alias, status status, double? duration = null, long? actionTime = null)
+        public UserAction(int meetingId, string userName, string alias, status status, long? duration = null, long? actionTime = null)
         {
             MeetingId = meetingId;
             UserName = userName;
