@@ -61,7 +61,7 @@ namespace Meet.Repository
                     action.UserId = GetUserDetails(alias).UserId;
                     action.Alias = GetUserDetails(alias).UserAlias;
                     action.status = (status)oReader["Status"];
-                    action.duration = Convert.IsDBNull(oReader["TimerDuration"]) ? null : (int?)oReader["TimerDuration"];
+                    action.duration = Convert.IsDBNull(oReader["TimerDuration"]) ? null : (double?)oReader["TimerDuration"];
                     details.Add(action);
                 }
 
@@ -154,7 +154,7 @@ namespace Meet.Repository
             return;
         }
 
-        public void UpdateParticipantStatus(int meetingId, int userId, int Status, int? time)
+        public void UpdateParticipantStatus(int meetingId, int userId, int Status, double? time)
         {
             SqlConnection con = new SqlConnection("Server=tcp:fhl2021.database.windows.net,1433;Initial Catalog=TeamsProject-FHL;Persist Security Info=False;User ID=defaultuser;Password=Helloworld@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             SqlCommand cmd;

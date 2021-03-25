@@ -64,12 +64,14 @@ namespace Meet.Controllers
             var model = repository.GetMeetingDetails((Int16.Parse(meetingId)), alias);
 
             List<UserAction> userActions = model.userActions;
+            double unixTimestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
 
-            if(userActions != null) { 
+            if (userActions != null) { 
                 model.joinedUsers = userActions.FindAll(x => x.status == status.Joined);
                 model.declinedUsers = userActions.FindAll(x => x.status == status.Declined);
                 model.noResponseUsers = userActions.FindAll(x => x.status == status.AwaitingResponses);
                 model.lateUsers = userActions.FindAll(x => x.status == status.Snooze);
+                model.lateUsers.ForEach(x => x.duration = (x.duration - unixTimestamp) /60);
             }
             return View("MeetingView", model);
         }
@@ -94,9 +96,10 @@ namespace Meet.Controllers
         {
             //Get user details
             var userID = repository.GetUserIdFromAlias(alias);
-
+            double unixTimestamp = (DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            double snoozedTill = (double)(time * 60) + unixTimestamp;
             //Update status
-            this.repository.UpdateParticipantStatus((Int32.Parse(meetingId)), userID, (int)status.Snooze, time);
+            this.repository.UpdateParticipantStatus((Int32.Parse(meetingId)), userID, (int)status.Snooze, snoozedTill);
 
             // TODO : emit userData here
             var model = repository.GetMeetingDetails((Int16.Parse(meetingId)), alias);
