@@ -49,76 +49,75 @@
                             <strong style="color:darkslateblue; font-size:large"> @Model.MeetingTitle</strong>
                         </div>
                     </div>
-                    <div style="height: 400px; background-color : black; margin-top: 30px;">
+                    <div style="height: 400px; background-color :currentColor; margin-top: 30px;">
                         <div style="width: 75%; text-align: center;padding-top:25%; padding-left:25%">
                             <strong style="color:white">@Model.UserName</strong>
                         </div>
                     </div>
                 </div>
-                <div style="margin-left: 5%; margin-right: 1%; width: 20%; margin-top: 5%; border-style: groove">
-                    <div class="glyphicon glyphicon-refresh" style="margin-left: 90%;; margin-top: 1%" onclick="refreshBoton()"></div>
+                <div style="margin-left: 1%;background-color : currentColor; margin-right: 1%; width: 25%; margin-top: 5%; border-style: groove">
+                    <div style="margin-left: 5%; margin-top: 1%; color:white;font-size:large;font-family:Calibri">
+                        <span>Participants</span>
+                        <span class="glyphicon glyphicon-refresh" style="margin-left: 50%; margin-top: 1%; color:white" onclick="refreshBoton()"></span>
+                    </div>
                     <div style="margin-left:5%">
                         <br>
-                        <div><b>In meeting:</b></div>
+                        
 
-                        @if (@Model.joinedUsers != null)
-                        {
+                        @if (@Model.joinedUsers != null && @Model.joinedUsers.Count > 0)
+                        {   <div style="color:white;font-family:Calibri;font-size:small"><b>In this meeting (@Model.joinedUsers.Count)</b></div>
                             @foreach (var userAction in @Model.joinedUsers)
                             {
                                 <table>
                                     <tr>
-                                        <td style='width: 120px'>@userAction.UserName</td>
+                                        <td style='width: 250px;color:white;font-family:Calibri;font-size:larger'>@userAction.UserName</td>
 
                                     </tr>
                                 </table>
                             }
+                            <br />
                         }
 
-                        <br>
-                        <div><b>Running late:</b></div>
-
-                        @if (@Model.lateUsers != null)
-                        {
+                        @if (@Model.lateUsers != null && @Model.lateUsers.Count > 0)
+                        {   <div style="color:white;font-family:Calibri;font-size:small"><b>Running late (@Model.lateUsers.Count)</b></div>
                             @foreach (var userAction in @Model.lateUsers)
                             {
                                 <table>
                                     <tr>
-                                        <td style='width: 120px'>@userAction.UserName</td>
+                                        <td style='width: 190px;color:white;font-family:Calibri;font-size:larger'>@userAction.UserName</td>
                                         @if (userAction.duration != null)
                                         {
-                                            <td style='width: 60px'>@userAction.duration min</td>
+                                            <td style='width: 60px;color:white;font-family:Calibri;font-size:larger '>@userAction.duration min</td>
                                         }
                                     </tr>
                                 </table>
                             }
+                            <br />
                         }
+                        
 
-                        <br>
-                        <div><b>Declined:</b></div>
-
-                        @if (@Model.declinedUsers != null)
-                        {
+                        @if (@Model.declinedUsers != null && @Model.declinedUsers.Count > 0)
+                        {   <div style="color:white;font-family:Calibri;font-size:small"><b>Declined (@Model.declinedUsers.Count)</b></div>
                             @foreach (var userAction in @Model.declinedUsers)
                             {
                                 <table>
                                     <tr>
-                                        <td style='width: 120px'>@userAction.UserName</td>
+                                        <td style='width: 250px;color:white;font-family:Calibri;font-size:larger'>@userAction.UserName</td>
 
                                     </tr>
                                 </table>
                             }
+                            <br />
                         }
+                        
 
-                        <br>
-                        <div><b>Others invited:</b></div>
-
-                        @if (@Model.noResponseUsers != null)
-                        {
+                        @if (@Model.noResponseUsers != null && @Model.noResponseUsers.Count > 0)
+                        {   <div style="color:white;font-family:Calibri;font-size:small"><b>Others invited (@Model.noResponseUsers.Count)</b></div>
                             @foreach (var userAction in @Model.noResponseUsers)
                             {
                                 <table>
                                     <tr>
-                                        <td style='width: 120px'>@userAction.UserName</td>
+                                        <td style='width: 250px;color:white;font-family:Calibri;font-size:larger'>@userAction.UserName</td>
 
                                     </tr>
                                 </table>
