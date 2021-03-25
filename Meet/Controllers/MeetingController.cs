@@ -105,10 +105,16 @@ namespace Meet.Controllers
             return View("MeetingPageView", model);
         }
 
-        // GET: /Meeting/ParticipantStatus?meetingId=4 
-        public string ParticipantStatus(string meetingId)
+        // GET: /Meeting/Leave?alias=1234&meetingId=4 
+        public IActionResult Leave(string meetingId, string alias)
         {
-            return HtmlEncoder.Default.Encode($"Getting the status of participants for the meeting : {meetingId}");
+            //Get user details
+            var userID = repository.GetUserIdFromAlias(alias);
+
+            //Update status
+            this.repository.UpdateParticipantStatus((Int32.Parse(meetingId)), userID, (int)status.AwaitingResponses, null);
+
+            return View("Index");
         }
 
 
